@@ -1,0 +1,55 @@
+[System]
+Name='Designed_with_fuzzy_designer'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=7
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='distance_error'
+Range=[-10 10]
+NumMFs=3
+MF1='Negative':'trapmf',[-10 -10 -3 0]
+MF2='Zero':'trimf',[-3 0 3]
+MF3='Positive':'trapmf',[0 3 10 10]
+
+[Input2]
+Name='relative_velocity'
+Range=[-5 5]
+NumMFs=3
+MF1='Negative':'trapmf',[-5 -5 -1.5 0]
+MF2='Zero':'trimf',[-1.5 0 1.5]
+MF3='Positive':'trapmf',[0 1.5 5 5]
+
+[Input3]
+Name='speed_error'
+Range=[-2 2]
+NumMFs=3
+MF1='Negative':'trapmf',[-2 -2 -0.4 0]
+MF2='Zero':'trimf',[-0.4 0 0.4]
+MF3='Positive':'trapmf',[0 0.4 2 2]
+
+[Output1]
+Name='acceleration'
+Range=[-3 2]
+NumMFs=5
+MF1='Negative_Big':'trapmf',[-3 -3 -1 -0.5]
+MF2='Zero':'trimf',[-0.5 0 0.5]
+MF3='Positive_Small':'trimf',[0 0.5 1]
+MF4='Negative_Small':'trimf',[-1 -0.5 0]
+MF5='Positive_Big':'trapmf',[0.5 1 2 2]
+
+[Rules]
+3 0 3, 5 (1) : 1
+3 0 2, 2 (1) : 1
+3 0 1, 4 (1) : 1
+1 1 0, 1 (1) : 1
+2 2 0, 2 (1) : 1
+2 3 1, 4 (1) : 1
+2 1 0, 4 (1) : 1
